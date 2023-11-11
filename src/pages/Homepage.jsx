@@ -5,6 +5,7 @@ import { getAllBooks } from "../modules/fetch";
 
 export default function Homepage() {
   const [books, setBooks] = useState([]);
+
   useEffect(() => {
     const fetchBooks = async () => {
       const books = await getAllBooks();
@@ -12,6 +13,25 @@ export default function Homepage() {
     };
     fetchBooks();
   }, []);
+
+  const NotFoundPage = () => {
+    return (
+      <Box
+        justifyContent={"center"}
+        mt={"200px"}
+        alignItems={"center"}
+        bgColor={"gray.200"}
+        w={"500px"}
+        mx={"auto"}
+        rounded={"lg"}
+        p={"20px"}
+      >
+        <Text fontSize={"40px"} color={"black"} align={"center"}>
+          Books Is Not Found !
+        </Text>
+      </Box>
+    );
+  };
 
   return (
     <Box w="full">
@@ -25,6 +45,7 @@ export default function Homepage() {
       >
         List Of Books
       </Text>
+      {books.length === 0 && <NotFoundPage />}
       <Flex
         gap={"40px"}
         flexWrap={"wrap"}
